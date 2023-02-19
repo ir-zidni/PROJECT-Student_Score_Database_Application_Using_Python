@@ -108,7 +108,7 @@ List menu:
         
         # OPSI 1 untuk menambahkan data
         if menuNumber == 1:
-            x = findNim(list)
+            x = findNim(list) 
             if x[0] == True:
                 print('\nNIM Yang Anda Input Sudah Ada!!!\n')
                             
@@ -275,7 +275,7 @@ List menu:
                     print('\nData Berhasil Dihapus')
                     
                 elif hapusData != 'Y':
-                    break
+                    print('\nData Tidak Dihapus')
             
             else:
                 print('\nNIM Yang Anda Masukan Tidak Ada')
