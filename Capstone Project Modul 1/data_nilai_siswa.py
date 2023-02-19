@@ -133,7 +133,7 @@ List menu:
                     subshow(list, x[1]+1)
                     
                 elif simpanData != 'Y' :
-                    print('\nData Tidak Tersimpan\n')
+                    print('\nData Tidak Tersimpan')
         
         # OPSI 2 untuk kembali ke menu utama
         elif menuNumber >= 2:
@@ -152,7 +152,7 @@ List menu:
         
         if menuNumber == 1 :
             while True:
-                                               
+                       
                 print('''
 ==========PILIH MENU================
 
@@ -182,7 +182,7 @@ List menu:
                                 subshow(list, x[1])
                         
                         elif ubahData != 'Y':
-                            break
+                            print('\nData Tidak Diubah')
                                                                 
                     elif x[0] != True:
                         print('\nNIM Yang Anda Input Tidak Ada Didatabase')
@@ -199,7 +199,7 @@ List menu:
                             subshow(list, x[1])
                         
                         elif ubahData != 'Y':
-                            break
+                            print('\nData Tidak Diubah')
                                                
                     elif x[0] != True:  
                         print('\nNIM Yang Anda Input Tidak Ada Di Database')
@@ -216,7 +216,7 @@ List menu:
                             subshow(list, x[1])
                         
                         elif ubahData != 'Y':
-                            break
+                            print('\nData Tidak Diubah')
                     
                     elif x[0] != True:    
                         print('\nNIM Yang Anda Input Tidak Ada Di Database')
@@ -240,7 +240,7 @@ List menu:
                             subshow(list, x[1])
 
                         elif ubahData != 'Y':
-                            break
+                            print('\nData Tidak Diubah')
                                           
                     elif x[0] != True:    
                         print('\nNIM Yang Anda Input Tidak Ada Di Database')
