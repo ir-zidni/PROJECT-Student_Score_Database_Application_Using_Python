@@ -25,7 +25,6 @@ listSiswa =[
     }
 ]
 
-
 def mainScreen():
     print('''
 ====SELAMAT DATANG DI SISTEM DATABASE====
@@ -39,10 +38,10 @@ List menu:
 5. Keluar
 ''')
 
-def findNim(list):
+def findNim(list): # untuk mengecek apakah nim ada di dalam list data
     nim = (input('\nMasukan NIM Siswa: ')).upper()
     i = 0
-    for i in range(len(list)): # untuk mencari nim di dalam list data
+    for i in range(len(list)): 
         if nim in list[i].values():
             return True, i, nim
     else:
@@ -62,7 +61,7 @@ def show(list): # untuk menampilkan seluruh data yang ada
         print(f'{list[i]["NIM"]}\t|{list[i]["Name"]:<10}\t|{list[i]["Gender"]}\t|{list[i]["Bahasa"]}\t|{list[i]["Math"]}\t|{list[i]["Fisika"]}\t|{avg(list, i)}')
 
 def subshow(list, index): # untuk menampilkan data siswa tertentu
-    print('\nDATA SISWA\n') 
+    print('\nDATA SISWA==========================\n') 
     print('NIM\t|Name\t\t|Gender\t|Bahasa\t|Math\t|Fisika\t|Rata-Rata')
     print(f'{list[index]["NIM"]}\t|{list[index]["Name"]:<10}\t|{list[index]["Gender"]}\t|{list[index]["Bahasa"]}\t|{list[index]["Math"]}\t|{list[index]["Fisika"]}\t|{avg(list, index)}')
 
@@ -82,7 +81,7 @@ List menu:
         if menuNumber == 1:
             show(list)
 
-        # OPSI 2
+        # OPSI 2 untuk menampilkan seluruh data siswa tertentu
         elif menuNumber == 2:
             x =  findNim(list)
             if x[0] == True:
@@ -91,7 +90,7 @@ List menu:
             elif x[0] != True :
                 print('\nNIM Yang Anda Input Tidak Ada Di Database')  
         
-        # OPSI 3            
+        # OPSI 3 untuk kembali ke menu utama          
         elif menuNumber >= 3:
             break
 
@@ -107,7 +106,7 @@ List menu:
 ''')
         menuNumber = int(input('Masukan Pilihan Menu: '))
         
-        # OPSI 1
+        # OPSI 1 untuk menambahkan data
         if menuNumber == 1:
             x = findNim(list)
             if x[0] == True:
@@ -136,7 +135,7 @@ List menu:
                 elif simpanData != 'Y' :
                     print('\nData Tidak Tersimpan\n')
         
-        # OPSI 2  
+        # OPSI 2 untuk kembali ke menu utama
         elif menuNumber >= 2:
             break      
 
@@ -146,39 +145,12 @@ def update(list):
 ==========PILIH MENU================
 
 List menu:
-1. Mengubah Seluruh Data Siswa
-2. Mengubah Data Tertentu
-3. Kembali Ke Menu Utama
+1. Mengubah Data Siswa
+2. Kembali Ke Menu Utama
 ''')
         menuNumber = int(input('Masukan Pilihan Menu: '))
         
-        # OPSI 1
-        if menuNumber == 1:
-            x = findNim(list)
-            if x[0] == True:
-                subshow(list, x[1])  
-                print('\nMasukan Data Siswa Yang Baru')                 
-                name = input('Masukan Nama Siswa: ').title()
-                gender = input('Masukan Jenis Kelamin Siswa: ').capitalize()
-                nilaiBahasa = int(input('Masukan Nilai Bahasa: '))
-                nilaiMath = int(input('Masukan Nilai Math: ')) 
-                nilaiFisika = int(input('Masukan Nilai Fisika: '))  
-                list[x[1]].update(
-                {
-                    'Name' : name,
-                    'Gender' : gender,
-                    'Bahasa' : nilaiBahasa,
-                    'Math' : nilaiMath,
-                    'Fisika' : nilaiFisika
-                })
-                print(f'\nData Siswa {list[x[1]]["NIM"]} Sudah Terupdate')
-                subshow(list, x[1]) 
-                            
-            elif x[0] != True :
-                print('\nData Yang Anda Cari Tidak Ada')
-
-        # OPSI 2
-        elif menuNumber == 2 :
+        if menuNumber == 1 :
             while True:
                                                
                 print('''
@@ -197,14 +169,20 @@ List menu:
                     x = findNim(list)
                     if x[0] == True:
                         subshow(list, x[1])
-                        print('\nMasukan NIM Siswa Yang Baru:')  
-                        y = findNim(list)
-                        if y[0] == True:
-                            print('\nNIM Yang Anda Input Sudah Ada Didatabase')
-                                
-                        elif y[0] != True: 
-                            list[x[1]].update({'NIM':y[2]})
-                            print(f'\nData NIM Siswa {list[x[1]]["Name"]} Sudah Diubah Menjadi {y[2]}')
+                        ubahData = input('\nAnda Ingin Mengubah NIM Siswa Ini Y/N: ').upper()
+                        if ubahData == 'Y':
+                            print('\nMasukan NIM Siswa Yang Baru')  
+                            y = findNim(list)
+                            if y[0] == True:
+                                print('\nNIM Yang Anda Input Sudah Ada Didatabase')
+                                    
+                            elif y[0] != True: 
+                                list[x[1]].update({'NIM':y[2]})
+                                print(f'\nNIM Siswa {list[x[1]]["Name"]} Sudah Diubah Menjadi {y[2]}')
+                                subshow(list, x[1])
+                        
+                        elif ubahData != 'Y':
+                            break
                                                                 
                     elif x[0] != True:
                         print('\nNIM Yang Anda Input Tidak Ada Didatabase')
@@ -212,11 +190,16 @@ List menu:
                 elif kolom == 2:
                     x = findNim(list)
                     if x[0] == True:
-                        subshow(list, x[1])  
-                        name = input('\nMasukan Nama Baru Siswa: ').title()
-                        list[x[1]].update({'Name':name})
-                        print(f'\nNama Siswa {list[x[1]]["NIM"]} Sudah Di Ubah ')
                         subshow(list, x[1])
+                        ubahData = input('\nAnda Ingin Mengubah Nama Siswa Ini Y/N: ').upper()
+                        if ubahData == 'Y':
+                            name = input('\nMasukan Nama Baru Siswa: ').title()
+                            list[x[1]].update({'Name':name})
+                            print(f'\nNama Siswa {list[x[1]]["NIM"]} Sudah DiUbah ')
+                            subshow(list, x[1])
+                        
+                        elif ubahData != 'Y':
+                            break
                                                
                     elif x[0] != True:  
                         print('\nNIM Yang Anda Input Tidak Ada Di Database')
@@ -224,11 +207,16 @@ List menu:
                 elif kolom == 3:
                     x = findNim(list)
                     if x[0] == True:
-                        subshow(list, x[1])  
-                        gender = input('\nMasukan Gender Baru Siswa: ').title()
-                        list[x[1]].update({'Gender':gender})
-                        print(f'\nGender Siswa {list[x[1]]["NIM"]} Sudah Di Ubah ')
                         subshow(list, x[1])
+                        ubahData = input('\nAnda Ingin Mengubah Gender Siswa Ini Y/N: ').upper()
+                        if ubahData == 'Y':  
+                            gender = input('\nMasukan Gender Baru Siswa: ').title()
+                            list[x[1]].update({'Gender':gender})
+                            print(f'\nGender Siswa {list[x[1]]["NIM"]} Sudah DiUbah ')
+                            subshow(list, x[1])
+                        
+                        elif ubahData != 'Y':
+                            break
                     
                     elif x[0] != True:    
                         print('\nNIM Yang Anda Input Tidak Ada Di Database')
@@ -236,18 +224,23 @@ List menu:
                 elif kolom == 4 :
                     x = findNim(list)
                     if x[0] == True:
-                        subshow(list, x[1])  
-                        nilaiBahasa = int(input('Masukan Nilai Bahasa: '))
-                        nilaiMath = int(input('Masukan Nilai Math: ')) 
-                        nilaiFisika = int(input('Masukan Nilai Fisika: '))
-                        list[x[1]].update(
-                    {
-                        'Bahasa' : nilaiBahasa,
-                        'Math' : nilaiMath,
-                        'Fisika' : nilaiFisika
-                    })
-                        print(f'\nData Nilai Siswa {list[x[1]]["NIM"]} Sudah Tersimpan')
-                        subshow(list, x[1])
+                        subshow(list, x[1]) 
+                        ubahData = input('\nAnda Ingin Mengubah Nilai Siswa Ini Y/N: ').upper()
+                        if ubahData == 'Y':   
+                            nilaiBahasa = int(input('Masukan Nilai Bahasa: '))
+                            nilaiMath = int(input('Masukan Nilai Math: ')) 
+                            nilaiFisika = int(input('Masukan Nilai Fisika: '))
+                            list[x[1]].update(
+                        {
+                            'Bahasa' : nilaiBahasa,
+                            'Math' : nilaiMath,
+                            'Fisika' : nilaiFisika
+                        })
+                            print(f'\nData Nilai Siswa {list[x[1]]["NIM"]} Sudah Diubah')
+                            subshow(list, x[1])
+
+                        elif ubahData != 'Y':
+                            break
                                           
                     elif x[0] != True:    
                         print('\nNIM Yang Anda Input Tidak Ada Di Database')
@@ -255,8 +248,8 @@ List menu:
                 elif kolom >= 5:
                     break
         
-        # OPSI 3
-        elif menuNumber >= 3 :
+        # OPSI 2 kembali ke menu utama
+        elif menuNumber >= 2 :
             break
 
 # FUNCTION DELETE DATA        
@@ -271,12 +264,12 @@ List menu:
 ''')
         menuNumber = int(input('Masukan Pilihan Menu: '))
         
-        # OPSI 1
+        # OPSI 1 mengjapus Data Siswa
         if menuNumber == 1:
             x = findNim(list)
             if x[0] == True:
                 subshow(list, x[1])
-                hapusData = input('Apakah anda ingin menghapus data Y/N: ').upper()
+                hapusData = input('\nApakah anda ingin menghapus data Y/N: ').upper()
                 if hapusData == 'Y':
                     del list[x[1]]
                     print('\nData Berhasil Dihapus')
@@ -287,7 +280,7 @@ List menu:
             else:
                 print('\nNIM Yang Anda Masukan Tidak Ada')
 
-        # OPSI 2            
+        # OPSI 2 Kembali Ke Menu Utama       
         elif menuNumber >= 2:
             break
 
