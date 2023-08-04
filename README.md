@@ -1,9 +1,7 @@
-# JCDSOL-09
-Nama        : Irfan Zidni
+# **Student Score Database Application Using Python**
 
-Sutdent ID  : JCDSOL-009-047
+Created By = Irfan Zidni
 
-Kelas       : JCDSOL
+This is my first project in learning python coding. This project is created to help me with basic python function and looping. 
 
-# Capstone Project Modul 1
-Tema : Data Nilai Siswa
+The project goals is to create simple student score database application. The application must have a certain feature, which is SHOW DATA, ADD DATA, DELETE DATA, and UPDATE DATA. The project take one week to complete and I learn a lot of python function and looping in this project. 
